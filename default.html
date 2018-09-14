@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Attach object</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="codebase/fonts/font_roboto/roboto.css"/>
+	<link rel="stylesheet" type="text/css" href="codebase/dhtmlx.css"/>
+	<script src="codebase/dhtmlx.js"></script>
+	<script src="script/apidata.js"></script>
+	<style>
+		html, body {
+			width: 100%;
+			height: 100%;
+			margin: 0px;
+			padding: 0px;
+			background-color: #ebebeb;
+			overflow: hidden;
+		}
+		div#layoutObj {
+			position: relative;
+			margin-top: 10px;
+			margin-left: 10px;
+			width: 100%;
+			height: 600px;
+		}
+		pre.css_example {
+			background-color: #fafafb;
+			width: 400px;
+		}
+		div#objId {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			font-family: Roboto, Arial, Helvetica;
+			font-size: 14px;
+			color: #404040;
+			overflow: auto;
+		}
+		 
+		.list { 
+              margin: 10px;
+                border-bottom:1px dashed #39c;
+        }
+        .list a { text-decoration:none; display:block; padding:5px; color:#39c; }
+        .list a:hover { background:#39c; color:#fff; }
+		.list a:hover, .current a { background:#39c; color:#fff; }
+	</style>
+	<script>
+		var myLayout;
+
+function loadpage(o){
+ 
+			var value=o.text+"----- 负责人:"+o.getAttribute("owner")
+		  myLayout.cells("b").setText(value);
+		  var url=o.getAttribute("data-href");
+		  if(url!=""){
+		  myLayout.cells("b").attachURL(url);
+		  }else{
+			myLayout.cells("b").attachObject("nocontent");
+		  }
+		$(o).parent().addClass("current");
+		$(o).parent().siblings().removeClass("current");		  
+		}
+
+		function doOnLoad() {
+			myLayout = new dhtmlXLayoutObject({
+				parent: document.body,
+				pattern: "2U"
+			});
+			myLayout.cells("a").setWidth(230);
+			myLayout.cells("a").setHeight(600);
+			myLayout.cells("a").setText("接口目录");
+			myLayout.cells("b").setText("文档详情展示");
+			myLayout.cells("a").attachObject("objId");
+			
+		}
+		
+		function doOnUnload() {
+			if (myLayout != null && myLayout.unload != null) {
+				myLayout.unload();
+				myLayout = null;
+			}
+		}
+		
+		
+	</script>
+</head>
+<body onload="doOnLoad();" onunload="doOnUnload();">
+	<div id="objId" style="height:100%;">
+		<div onclick="loadpage();" class='list'><a  data-href='http://dianpinguat.lenovo.com.cn:8088//index.html' owner='孙宜营' onclick="loadpage(this);">用户权限</a></div>
+		<div class='list'><a   data-href='http://10.99.101.139:8082/index.html' owner='屠海涛' onclick="loadpage(this);">单据中心</a></div>
+		<div class='list'><a   data-href='http://10.99.101.139:8084/index.html' owner='屠海涛' onclick="loadpage(this);">事件中心</a></div>
+		<div class='list'><a   data-href='http://lcseuat.lenovo.com.cn/index.html' owner='隋广武' onclick="loadpage(this);">用户中心</a></div>
+		<div class='list'><a   data-href='' owner='屠海涛' onclick='loadpage(this);'>附件中心</a></div>
+		
+	</div>
+ 
+	<div id="objId" style="display: none;">
+		<div style="margin: 5px 8px;">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+
+	function test(){
+		alert(1);
+	}
+
+		
+</script>
+</html>

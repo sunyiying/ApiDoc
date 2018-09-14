@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Layout patterns</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="codebase/fonts/font_roboto/roboto.css"/>
+	<link rel="stylesheet" type="text/css" href="codebase/dhtmlx.css"/>
+	<script src="codebase/dhtmlx.js"></script>
+	<script src="script/jquery-1.7.1.min.js"></script>
+	<script src="script/apidata.js"></script>
+	<style>
+		html, body {
+			width: 100%;
+			height: 100%;
+			margin: 0px;
+			padding: 0px;
+			background-color: #ebebeb;
+			overflow: hidden;
+		}
+        .list { 
+              margin: 10px;
+                border-bottom:1px dashed #39c;
+        }
+        .list a { text-decoration:none; display:block; padding:5px; color:#39c; }
+        .list a:hover { background:#39c; color:#fff; }
+		.list a:hover, .current a { background:#39c; color:#fff; }
+	</style>
+	<script type="text/javascript">
+		var myLayout;
+		   function loadpage(o){		  
+				 var value=o.text+"----- 负责人: "+o.getAttribute("owner")
+				  myLayout.cells("b").setText(value);
+				  var url=o.getAttribute("data-href");
+				  if(url!=""){
+				  myLayout.cells("b").attachURL(url);
+				  }else{
+					myLayout.cells("b").attachObject("nocontent");
+				  }
+				$(o).parent().addClass("current");
+				$(o).parent().siblings().removeClass("current");		  
+				
+				}
+				
+				//加载菜单
+				function loadmenu(){
+					var container=$("#objId");
+					container.html("");
+					if(apidata!=null&&apidata.length>0){
+						for (var key in apidata) {
+							var e=apidata[key];
+							if(!!e.display){
+							var text="<div class='list'><a display='"+e.display+"'  data-href='"+e.url+"' owner='"+e.owner+"' onclick='loadpage(this);'>"+e.name+"</a></div>";
+							container.append($(text));	
+							}
+						}					
+					}
+				};
+	 
+	
+		$(function(){	
+			loadmenu();				
+			doOnLoad();
+		});
+
+		function doOnLoad() {
+			myLayout = new dhtmlXLayoutObject({
+				parent: document.body,
+				pattern: "2U"
+			});
+			myLayout.cells("a").setWidth(230);
+			myLayout.cells("a").setText("接口目录");
+			myLayout.cells("b").setText("文档详情展示");			 
+			myLayout.cells("a").attachObject("objId");
+			myLayout.cells("b").attachURL("blank.html");			
+		}
+		
+	</script>
+</head>
+<body>	
+	<div id="objId" style="display: none;">
+	</div> 
+	<div id="nocontent" style="display:none">   您好，此接口文档开发中，请稍后。。。请联系管理员！！</div>
+</body>
+
+</html>
