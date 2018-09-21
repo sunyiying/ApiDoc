@@ -4,16 +4,17 @@ $(function(){
 		for (var key in data) {
 			var e=data[key];
 			$(".mainName").append($("<li style='display:none;'>"+e.text+"</li>")); 
-			var orderno=parseInt(key)+1;
+			$(".mainbanner_list").append("<li><a href='javascript:void(0);'>"+e.text+"</a></li>");	
 			if(key==0){
 				$("#iframe").attr("src",e.url)
 			}
-			$(".mainbanner_list").append("<li><a href='javascript:void(0);'>"+orderno+"</a></li>");				 
+			 
 		}					
 	}
 
 	$('.mainbanner').each(function(){
 		var $_root = $(this);
+		var $_fixBox=$(".fixBox");
 		var $window_b = $_root.find('.mainbanner_window');
 		var $list = $_root.find('.mainbanner_list');
 		var $items = $list.children();
@@ -63,10 +64,21 @@ $(function(){
 			}
 		},autoplay_interval);
 
-		$_root.hover(function(){
+ 
+		$_root.hover(function(e){
 			autoplay_flag = false;
+			console.log(e.clientY);
+			console.log(autoplay_flag);
 		},function(){
 			autoplay_flag = true;
+			console.log(autoplay_flag);
+		});
+	  	 
+		$_fixBox.mouseover(function(e){
+			autoplay_flag = !autoplay_flag;
+			var color=autoplay_flag?"Green":"Red";
+			$(".showMsg").css("background-color",color).fadeIn(2000).fadeOut(2000);
+			
 		});
 		
 		goto(0);
