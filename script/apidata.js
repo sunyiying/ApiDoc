@@ -31,6 +31,5 @@
         url:"http://10.99.101.68:8096/local/index.html",
         name:"产品中心",
         display:true
-
     }
 ];
