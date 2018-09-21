@@ -1,4 +1,4 @@
-var apidata=[
+﻿var apidata=[
     {   owner:"孙宜营", 
         url:"http://dianpinguat.lenovo.com.cn:8088//index.html",
         name:"用户权限",
@@ -16,13 +16,13 @@ var apidata=[
     },
     { 
         owner:"屠海涛", 
-        url:"",
+        url:"http://10.99.101.139:8086/index.html",
         name:"附件中心",
         display:true  
     },
     { 
         owner:"隋广武", 
-        url:"http://lcseuat.lenovo.com.cn/index.html",
+        url:"http://lcseuat.lenovo.com.cn:89/index.html",
         name:"用户中心",
         display:true  
     },
